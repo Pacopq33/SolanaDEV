@@ -9,6 +9,8 @@ A blockchain-based space mining game built on Solana, inspired by CryptoMines. P
 - **5-Tier Planet System**: Explore planets from Tier 1 to Tier 5, each with increasing difficulty and rewards
 - **Mining Expeditions**: Deploy your fleet to mine resources and earn $DST tokens
 - **Marketplace**: Buy and sell NFT ships and drones with other players
+- **Quick World Explorer**: Simulate expedition outcomes with live Solana devnet connectivity before committing your fleet
+- **Localization**: Instantly switch between English, Español, and 中文 from anywhere in the app
 
 ### Tokenomics
 - **$GXY (Governance Token)**: Used for staking, governance, and premium features
@@ -42,6 +44,7 @@ A blockchain-based space mining game built on Solana, inspired by CryptoMines. P
 - **Styling**: Tailwind CSS v4, shadcn/ui components
 - **Blockchain**: Solana Web3.js, Solana Wallet Adapter
 - **Design**: Cyberpunk aesthetic with neon colors (cyan, magenta, green)
+- **Multi-language UI**: Built-in language selector with persistent preference storage
 
 ## Getting Started
 
@@ -64,12 +67,26 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
+### Testing on Solana Devnet
+
+1. Ensure your wallet (Phantom or Solflare) is set to **Devnet**
+2. Connect using the **Connect Wallet** button in the top navigation
+3. From the dashboard quick actions, click **Request Devnet SOL** to airdrop 1 SOL for testing
+4. Use the **Quick World Explorer** to simulate expeditions – each run pings Solana devnet so you can observe network latency and success/failure flows
+5. Monitor your live SOL balance in the dashboard stats to verify the airdrop and any future on-chain interactions
+
 ### Connecting Your Wallet
 
 1. Click "Connect Wallet" in the top right
 2. Select your wallet provider (Phantom or Solflare)
 3. Approve the connection
 4. Start playing!
+
+### Changing the Interface Language
+
+1. Open the globe icon next to the wallet button
+2. Choose between **English**, **Español**, or **中文**
+3. Your selection is stored locally and persists across refreshes
 
 ## Game Mechanics
 
@@ -85,6 +102,7 @@ npm run dev
 3. Choose ships and drones for the expedition
 4. Launch and wait for completion
 5. Collect $DST token rewards
+6. Preview potential rewards and risk using the **Quick World Explorer** before launching a full expedition
 
 ### Marketplace Trading
 1. Browse available ships and drones

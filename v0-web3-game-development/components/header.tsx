@@ -3,8 +3,12 @@
 import { Rocket } from "lucide-react"
 import { WalletButton } from "@/components/wallet-button"
 import Link from "next/link"
+import { useI18n } from "@/lib/i18n/context"
+import { LanguageSelector } from "@/components/language-selector"
 
 export function Header() {
+  const { t } = useI18n()
+
   return (
     <header className="border-b border-primary/20 bg-card/50 backdrop-blur-xl sticky top-0 z-40">
       <div className="container mx-auto px-4 py-4">
@@ -22,23 +26,26 @@ export function Header() {
 
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
-              DASHBOARD
+              {t.nav.home.toUpperCase()}
             </Link>
             <Link href="/fleet" className="text-sm font-medium hover:text-primary transition-colors">
-              FLEET
+              {t.nav.fleet.toUpperCase()}
             </Link>
             <Link href="/marketplace" className="text-sm font-medium hover:text-primary transition-colors">
-              MARKETPLACE
+              {t.nav.marketplace.toUpperCase()}
             </Link>
             <Link href="/planets" className="text-sm font-medium hover:text-primary transition-colors">
-              PLANETS
+              {t.nav.planets.toUpperCase()}
             </Link>
             <Link href="/tokens" className="text-sm font-medium hover:text-primary transition-colors">
-              TOKENS
+              {t.nav.tokens.toUpperCase()}
             </Link>
           </nav>
 
-          <WalletButton />
+          <div className="flex items-center gap-3">
+            <LanguageSelector />
+            <WalletButton />
+          </div>
         </div>
       </div>
     </header>

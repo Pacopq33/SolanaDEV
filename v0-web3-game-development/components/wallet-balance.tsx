@@ -5,12 +5,14 @@ import { LAMPORTS_PER_SOL } from "@solana/web3.js"
 import { useEffect, useState } from "react"
 import { Coins, Loader2 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useI18n } from "@/lib/i18n/context"
 
 export function WalletBalance() {
   const { connection } = useConnection()
   const { publicKey } = useWallet()
   const [balance, setBalance] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)
+  const { t } = useI18n()
 
   useEffect(() => {
     if (!publicKey) {
@@ -41,12 +43,14 @@ export function WalletBalance() {
     return (
       <Card className="border-primary/30 bg-card/50 backdrop-blur border-glow">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">WALLET</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">
+            {t.home.wallet.title.toUpperCase()}
+          </CardTitle>
           <Coins className="h-4 w-4 text-primary" />
         </CardHeader>
         <CardContent>
-          <div className="text-lg font-bold text-muted-foreground">Not Connected</div>
-          <p className="text-xs text-muted-foreground mt-2">Connect your wallet to start</p>
+          <div className="text-lg font-bold text-muted-foreground">{t.home.wallet.disconnected}</div>
+          <p className="text-xs text-muted-foreground mt-2">{t.home.wallet.connectPrompt}</p>
         </CardContent>
       </Card>
     )
@@ -55,14 +59,16 @@ export function WalletBalance() {
   return (
     <Card className="border-primary/30 bg-card/50 backdrop-blur border-glow">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">SOL BALANCE</CardTitle>
+        <CardTitle className="text-sm font-medium text-muted-foreground">
+          {t.home.wallet.balanceTitle.toUpperCase()}
+        </CardTitle>
         <Coins className="h-4 w-4 text-primary" />
       </CardHeader>
       <CardContent>
         {loading ? (
           <div className="flex items-center gap-2">
             <Loader2 className="h-4 w-4 animate-spin text-primary" />
-            <span className="text-sm text-muted-foreground">Loading...</span>
+            <span className="text-sm text-muted-foreground">{t.home.wallet.loading}</span>
           </div>
         ) : (
           <>

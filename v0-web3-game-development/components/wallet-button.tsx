@@ -12,10 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useI18n } from "@/lib/i18n/context"
 
 export function WalletButton() {
   const { publicKey, disconnect, connected } = useWallet()
   const { setVisible } = useWalletModal()
+  const { t } = useI18n()
 
   const handleConnect = () => {
     setVisible(true)
@@ -32,7 +34,7 @@ export function WalletButton() {
         className="bg-primary text-primary-foreground hover:bg-primary/90 border-glow font-bold"
       >
         <Wallet className="mr-2 h-4 w-4" />
-        CONNECT WALLET
+        {t.common.connectWallet.toUpperCase()}
       </Button>
     )
   }
@@ -53,7 +55,7 @@ export function WalletButton() {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleDisconnect} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
-          Disconnect
+          {t.common.disconnect}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

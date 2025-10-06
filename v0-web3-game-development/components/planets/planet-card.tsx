@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { ExpeditionLauncher } from "./expedition-launcher"
+import { useI18n } from "@/lib/i18n/context"
 
 interface PlanetCardProps {
   planet: Planet
@@ -22,6 +23,7 @@ interface PlanetCardProps {
 
 export function PlanetCard({ planet }: PlanetCardProps) {
   const [dialogOpen, setDialogOpen] = useState(false)
+  const { t } = useI18n()
 
   const tierColors = {
     1: "bg-gray-500/20 text-gray-300 border-gray-500/50",
@@ -57,7 +59,9 @@ export function PlanetCard({ planet }: PlanetCardProps) {
           </div>
         )}
         <div className="absolute top-3 right-3">
-          <Badge className={tierColors[planet.tier]}>TIER {planet.tier}</Badge>
+          <Badge className={tierColors[planet.tier]}>
+            {t.planets.tier.toUpperCase()} {planet.tier}
+          </Badge>
         </div>
       </div>
 
@@ -70,7 +74,7 @@ export function PlanetCard({ planet }: PlanetCardProps) {
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-2">
             <Zap className="h-4 w-4 text-primary" />
-            <span className="text-muted-foreground">Required MP</span>
+            <span className="text-muted-foreground">{t.planets.requiredPower}</span>
           </div>
           <span className={`font-bold ${isUnlocked ? "text-accent" : "text-destructive"}`}>
             {planet.requiredMiningPower} MP
@@ -80,7 +84,7 @@ export function PlanetCard({ planet }: PlanetCardProps) {
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4 text-secondary" />
-            <span className="text-muted-foreground">Duration</span>
+            <span className="text-muted-foreground">{t.planets.duration}</span>
           </div>
           <span className="font-bold">{planet.duration / 3600}h</span>
         </div>
@@ -88,7 +92,7 @@ export function PlanetCard({ planet }: PlanetCardProps) {
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-2">
             <Trophy className="h-4 w-4 text-accent" />
-            <span className="text-muted-foreground">Base Reward</span>
+            <span className="text-muted-foreground">{t.planets.baseReward}</span>
           </div>
           <span className="font-bold text-accent">{planet.baseReward} $DST</span>
         </div>
@@ -96,7 +100,7 @@ export function PlanetCard({ planet }: PlanetCardProps) {
         {!isUnlocked && (
           <div className="pt-2 border-t border-border/50">
             <p className="text-xs text-destructive">
-              Upgrade your fleet to unlock this planet (Need {planet.requiredMiningPower - userMiningPower} more MP)
+              {t.planets.unlockHint} ({t.planets.needMorePower.replace("{power}", (planet.requiredMiningPower - userMiningPower).toString())})
             </p>
           </div>
         )}
@@ -109,13 +113,15 @@ export function PlanetCard({ planet }: PlanetCardProps) {
               disabled={!isUnlocked}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 border-glow font-bold"
             >
-              {isUnlocked ? "LAUNCH EXPEDITION" : "LOCKED"}
+              {isUnlocked ? t.planets.launch.toUpperCase() : t.planets.locked.toUpperCase()}
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-card border-primary/30 max-w-2xl">
             <DialogHeader>
-              <DialogTitle className="text-2xl text-primary glow-cyan">Launch Expedition to {planet.name}</DialogTitle>
-              <DialogDescription>Select your fleet and start mining</DialogDescription>
+              <DialogTitle className="text-2xl text-primary glow-cyan">
+                {t.planets.launchTitle.replace("{planet}", planet.name)}
+              </DialogTitle>
+              <DialogDescription>{t.planets.launchDescription}</DialogDescription>
             </DialogHeader>
             <ExpeditionLauncher planet={planet} onClose={() => setDialogOpen(false)} />
           </DialogContent>
