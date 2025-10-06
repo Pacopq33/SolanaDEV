@@ -17,33 +17,39 @@ export function useTransactionModal() {
     status: "pending",
   })
 
-  const showPending = useCallback((title?: string, message?: string) => {
-    setState({
-      isOpen: true,
-      status: "pending",
-      title,
-      message,
-    })
-  }, [])
+  const showModal = useCallback(
+    (status: TransactionStatus, title?: string, message?: string, txSignature?: string) => {
+      setState({
+        isOpen: true,
+        status,
+        title,
+        message,
+        txSignature,
+      })
+    },
+    [],
+  )
 
-  const showSuccess = useCallback((title?: string, message?: string, txSignature?: string) => {
-    setState({
-      isOpen: true,
-      status: "success",
-      title,
-      message,
-      txSignature,
-    })
-  }, [])
+  const showPending = useCallback(
+    (title?: string, message?: string) => {
+      showModal("pending", title, message)
+    },
+    [showModal],
+  )
 
-  const showError = useCallback((title?: string, message?: string) => {
-    setState({
-      isOpen: true,
-      status: "error",
-      title,
-      message,
-    })
-  }, [])
+  const showSuccess = useCallback(
+    (title?: string, message?: string, txSignature?: string) => {
+      showModal("success", title, message, txSignature)
+    },
+    [showModal],
+  )
+
+  const showError = useCallback(
+    (title?: string, message?: string) => {
+      showModal("error", title, message)
+    },
+    [showModal],
+  )
 
   const close = useCallback(() => {
     setState((prev) => ({ ...prev, isOpen: false }))
@@ -51,6 +57,7 @@ export function useTransactionModal() {
 
   return {
     ...state,
+    showModal,
     showPending,
     showSuccess,
     showError,

@@ -9,6 +9,7 @@ import { Rocket, Cpu, Loader2 } from "lucide-react"
 import { SHIP_RARITIES, DRONE_TYPES } from "@/lib/solana/constants"
 import { TransactionModal } from "@/components/ui/transaction-modal"
 import { useTransactionModal } from "@/hooks/use-transaction-modal"
+import { useI18n } from "@/lib/i18n/context"
 
 export function MintSection() {
   const { connected } = useWallet()
@@ -17,17 +18,24 @@ export function MintSection() {
   const [mintingDrone, setMintingDrone] = useState(false)
   const [selectedRarity, setSelectedRarity] = useState<string>("Common")
   const [selectedDroneType, setSelectedDroneType] = useState<string>("Mining")
+  const { t } = useI18n()
+  const rarityTranslations = t.fleet.rarity as Record<string, string>
 
   const handleMintShip = async () => {
+    const rarityLabel = rarityTranslations[selectedRarity.toLowerCase()] ?? selectedRarity
+
     if (!connected) {
-      transactionModal.showError("WALLET NOT CONNECTED", "Please connect your Phantom or Solflare wallet to mint NFTs")
+      transactionModal.showError(
+        t.fleet.mintSection.walletErrorTitle,
+        t.fleet.mintSection.walletErrorDescription,
+      )
       return
     }
 
     setMintingShip(true)
     transactionModal.showPending(
-      "MINTING SPACESHIP",
-      `Creating your ${selectedRarity} spaceship on Solana blockchain...`,
+      t.fleet.mintSection.pendingTitle,
+      t.fleet.mintSection.pendingDescription.replace("{rarity}", rarityLabel),
     )
 
     // Simulate minting process
@@ -37,8 +45,8 @@ export function MintSection() {
     const mockTxSignature = `${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`
 
     transactionModal.showSuccess(
-      "SPACESHIP MINTED!",
-      `Your ${selectedRarity} spaceship has been successfully minted and added to your fleet.`,
+      t.fleet.mintSection.successTitle,
+      t.fleet.mintSection.successDescription.replace("{rarity}", rarityLabel),
       mockTxSignature,
     )
     setMintingShip(false)
@@ -46,12 +54,18 @@ export function MintSection() {
 
   const handleMintDrone = async () => {
     if (!connected) {
-      transactionModal.showError("WALLET NOT CONNECTED", "Please connect your Phantom or Solflare wallet to mint NFTs")
+      transactionModal.showError(
+        t.fleet.mintSection.walletErrorTitle,
+        t.fleet.mintSection.walletErrorDescription,
+      )
       return
     }
 
     setMintingDrone(true)
-    transactionModal.showPending("MINTING DRONE", `Creating your ${selectedDroneType} drone on Solana blockchain...`)
+    transactionModal.showPending(
+      t.fleet.mintSection.dronePendingTitle,
+      t.fleet.mintSection.dronePendingDescription.replace("{type}", selectedDroneType),
+    )
 
     // Simulate minting process
     await new Promise((resolve) => setTimeout(resolve, 3000))
@@ -60,8 +74,8 @@ export function MintSection() {
     const mockTxSignature = `${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`
 
     transactionModal.showSuccess(
-      "DRONE MINTED!",
-      `Your ${selectedDroneType} drone has been successfully minted and is ready for deployment.`,
+      t.fleet.mintSection.droneSuccessTitle,
+      t.fleet.mintSection.droneSuccessDescription.replace("{type}", selectedDroneType),
       mockTxSignature,
     )
     setMintingDrone(false)
@@ -86,14 +100,14 @@ export function MintSection() {
                 <Rocket className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <CardTitle className="text-primary glow-cyan">MINT SPACESHIP</CardTitle>
-                <CardDescription>Create a new NFT spaceship</CardDescription>
+                <CardTitle className="text-primary glow-cyan">{t.fleet.mintSection.shipTitle.toUpperCase()}</CardTitle>
+                <CardDescription>{t.fleet.mintSection.shipDescription}</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Rarity</label>
+              <label className="text-sm font-medium">{t.fleet.mintSection.rarityLabel}</label>
               <Select value={selectedRarity} onValueChange={setSelectedRarity}>
                 <SelectTrigger className="bg-background/50 border-primary/30">
                   <SelectValue />
@@ -101,7 +115,7 @@ export function MintSection() {
                 <SelectContent>
                   {SHIP_RARITIES.map((rarity) => (
                     <SelectItem key={rarity} value={rarity}>
-                      {rarity}
+                      {rarityTranslations[rarity.toLowerCase()] ?? rarity}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -110,11 +124,11 @@ export function MintSection() {
 
             <div className="space-y-2 p-3 rounded-lg bg-background/30 border border-border/50">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Cost</span>
+                <span className="text-muted-foreground">{t.fleet.mintSection.costLabel}</span>
                 <span className="font-bold text-primary">0.5 SOL</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">$GXY Required</span>
+                <span className="text-muted-foreground">{t.fleet.mintSection.gxyRequired}</span>
                 <span className="font-bold text-accent">100 $GXY</span>
               </div>
             </div>
@@ -127,10 +141,10 @@ export function MintSection() {
               {mintingShip ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Minting...
+                  {t.fleet.mintSection.minting}
                 </>
               ) : (
-                "MINT SHIP"
+                t.fleet.mintSection.mintShipCta.toUpperCase()
               )}
             </Button>
           </CardContent>
@@ -143,14 +157,14 @@ export function MintSection() {
                 <Cpu className="h-6 w-6 text-secondary" />
               </div>
               <div>
-                <CardTitle className="text-secondary glow-magenta">MINT DRONE</CardTitle>
-                <CardDescription>Create a new NFT drone</CardDescription>
+                <CardTitle className="text-secondary glow-magenta">{t.fleet.mintSection.droneTitle.toUpperCase()}</CardTitle>
+                <CardDescription>{t.fleet.mintSection.droneDescription}</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Type</label>
+              <label className="text-sm font-medium">{t.fleet.mintSection.typeLabel}</label>
               <Select value={selectedDroneType} onValueChange={setSelectedDroneType}>
                 <SelectTrigger className="bg-background/50 border-secondary/30">
                   <SelectValue />
@@ -167,11 +181,11 @@ export function MintSection() {
 
             <div className="space-y-2 p-3 rounded-lg bg-background/30 border border-border/50">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Cost</span>
+                <span className="text-muted-foreground">{t.fleet.mintSection.costLabel}</span>
                 <span className="font-bold text-secondary">0.2 SOL</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">$GXY Required</span>
+                <span className="text-muted-foreground">{t.fleet.mintSection.gxyRequired}</span>
                 <span className="font-bold text-accent">50 $GXY</span>
               </div>
             </div>
@@ -184,10 +198,10 @@ export function MintSection() {
               {mintingDrone ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Minting...
+                  {t.fleet.mintSection.minting}
                 </>
               ) : (
-                "MINT DRONE"
+                t.fleet.mintSection.mintDroneCta.toUpperCase()
               )}
             </Button>
           </CardContent>

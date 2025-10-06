@@ -1,6 +1,14 @@
 export const translations = {
   en: {
-    // Navigation
+    common: {
+      connectWallet: "Connect Wallet",
+      disconnect: "Disconnect",
+      walletNotConnected: "Wallet not connected",
+      connectPrompt: "Please connect your wallet to continue.",
+      cancel: "Cancel",
+      loading: "Loading...",
+      viewOnSolscan: "View on Solscan",
+    },
     nav: {
       home: "Home",
       fleet: "Fleet",
@@ -8,10 +16,10 @@ export const translations = {
       planets: "Planets",
       tokens: "Tokens",
     },
-    // Home
     home: {
       title: "Space Mining Game",
       subtitle: "Explore the galaxy, mine resources, and build your empire",
+      badge: "Live on Solana Devnet",
       totalFleet: "Total Fleet",
       activeMissions: "Active Missions",
       totalEarnings: "Total Earnings",
@@ -19,8 +27,62 @@ export const translations = {
       exploreMarket: "Explore Market",
       startExpedition: "Start Expedition",
       manageTokens: "Manage Tokens",
+      metrics: {
+        minted: "Total NFTs Minted",
+        dst: "$DST Distributed",
+        miners: "Active Miners",
+      },
+      stats: {
+        miningPower: "Mining Power",
+        miningChange: "+12% from last expedition",
+        fuelReserves: "Fuel Reserves",
+        fuelHint: "Enough for 12 expeditions",
+        fleetStatus: "Fleet Status",
+        fleetHint: "3 ships in hangar",
+      },
+      wallet: {
+        title: "Wallet",
+        disconnected: "Not Connected",
+        connectPrompt: "Connect your wallet to start",
+        balanceTitle: "SOL Balance",
+        loading: "Loading...",
+      },
+      quickActions: {
+        expedition: {
+          title: "Start Expedition",
+          description: "Deploy your fleet to mine resources.",
+          cta: "Launch Expedition",
+        },
+        marketplace: {
+          title: "Marketplace",
+          description: "Trade NFT ships and drones.",
+          cta: "Browse Market",
+        },
+        planets: {
+          title: "Explore Planets",
+          description: "Discover new mining locations.",
+          cta: "View Galaxy Map",
+        },
+        fleet: {
+          title: "Upgrade & Repair",
+          description: "Maintain and enhance your fleet.",
+          cta: "Manage Fleet",
+        },
+        tokens: {
+          title: "Token Economy",
+          description: "Stake and track $GXY and $DST.",
+          cta: "View Tokens",
+        },
+        devnet: {
+          title: "Request Devnet SOL",
+          description: "Load test SOL from the devnet faucet to simulate gameplay rewards.",
+          cta: "Request 1 SOL",
+          success: "Airdrop requested! Your wallet will receive 1 SOL shortly.",
+          error: "Unable to complete airdrop. Please try again.",
+          requiresWallet: "Connect your wallet to request devnet SOL.",
+        },
+      },
     },
-    // Fleet
     fleet: {
       title: "My Fleet",
       ships: "Ships",
@@ -48,8 +110,30 @@ export const translations = {
         epic: "Epic",
         legendary: "Legendary",
       },
+      mintSection: {
+        shipTitle: "Mint Spaceship",
+        shipDescription: "Create a new NFT spaceship",
+        rarityLabel: "Rarity",
+        costLabel: "Cost",
+        gxyRequired: "$GXY Required",
+        pendingTitle: "Minting Spaceship",
+        pendingDescription: "Creating your {rarity} spaceship on Solana blockchain...",
+        successTitle: "Spaceship Minted!",
+        successDescription: "Your {rarity} spaceship has been successfully minted and added to your fleet.",
+        droneTitle: "Mint Drone",
+        droneDescription: "Create a new NFT drone",
+        typeLabel: "Type",
+        dronePendingTitle: "Minting Drone",
+        dronePendingDescription: "Creating your {type} drone on Solana blockchain...",
+        droneSuccessTitle: "Drone Minted!",
+        droneSuccessDescription: "Your {type} drone has been successfully minted and is ready for deployment.",
+        mintShipCta: "Mint Ship",
+        mintDroneCta: "Mint Drone",
+        minting: "Minting...",
+        walletErrorTitle: "Wallet Not Connected",
+        walletErrorDescription: "Please connect your Phantom or Solflare wallet to mint NFTs.",
+      },
     },
-    // Marketplace
     marketplace: {
       title: "Marketplace",
       volume: "24h Volume",
@@ -65,8 +149,15 @@ export const translations = {
       sortBy: "Sort By",
       buy: "Buy Now",
       listedBy: "Listed by",
+      connectWallet: "Connect your wallet to browse the marketplace",
+      showing: "Showing {count} listings",
+      sort: {
+        recent: "Recently Listed",
+        priceLow: "Price: Low to High",
+        priceHigh: "Price: High to Low",
+        rarity: "Rarity",
+      },
     },
-    // Planets
     planets: {
       title: "Planets",
       subtitle: "Choose your destination",
@@ -80,8 +171,76 @@ export const translations = {
       claim: "Claim Rewards",
       selectShip: "Select Ship",
       selectDrone: "Select Drone",
+      connectWallet: "Connect your wallet to explore planets",
+      availableTitle: "Available Planets",
+      locked: "Locked",
+      unlockHint: "Upgrade your fleet to unlock this planet",
+      needMorePower: "Need {power} more MP",
+      launchTitle: "Launch Expedition to {planet}",
+      launchDescription: "Select your fleet and start mining",
+      totalMiningPower: "Total Mining Power",
+      fuelCost: "Fuel Cost",
+      durationShort: "Duration",
+      selectShips: "Select Ships",
+      selectedShips: "{count} selected",
+      noShipsAvailable: "No ships available in hangar",
+      cancel: "Cancel",
+      launchCta: "Launch Expedition",
+      launching: "Launching...",
+      noShipsSelectedTitle: "No ships selected",
+      noShipsSelectedDescription: "Please select at least one ship for the expedition",
+      insufficientPowerTitle: "Insufficient Mining Power",
+      insufficientPowerDescription: "You need {power} MP to mine on this planet",
+      shipCount: "{count} ships deployed",
+      readyToClaim: "Ready to claim rewards!",
+      claimRewards: "Claim Rewards",
+      claimToastTitle: "Rewards Claimed!",
+      claimToastDescription: "You received 2,450 $DST and rare materials",
+      status: {
+        active: "Active",
+        complete: "Complete",
+      },
+      catalog: {
+        novaraPrime: {
+          name: "Novara Prime",
+          description: "A barren world with basic mineral deposits. Perfect for beginners.",
+        },
+        crystalis: {
+          name: "Crystalis",
+          description: "Ice planet rich in crystalline structures and rare minerals.",
+        },
+        pyroxis: {
+          name: "Pyroxis",
+          description: "Volcanic world with extreme heat and valuable ore deposits.",
+        },
+        nebulox: {
+          name: "Nebulox",
+          description: "Gas giant moon with exotic matter and high-value resources.",
+        },
+        quantumNexus: {
+          name: "Quantum Nexus",
+          description: "Legendary planet at the edge of known space. Maximum rewards.",
+        },
+      },
+      worldsExplorer: {
+        title: "Quick World Explorer",
+        description: "Preview planet rewards and simulate expedition outcomes instantly.",
+        winRate: "Success Rate",
+        reward: "Reward",
+        gasCost: "Gas Cost",
+        explore: "Start Simulation",
+        requirements: "Requirements",
+        requiresShipLevel: "Ship Level {level}",
+        requiresCrewLevel: "Crew Level {level}",
+        walletRequired: "Connect your wallet to start a simulation.",
+        insufficientGas: "Not enough fuel for this route.",
+        pending: "Locking navigation route...",
+        successTitle: "Expedition Successful!",
+        successDescription: "Your crew brought back {reward} $DST.",
+        failureTitle: "Expedition Failed",
+        failureDescription: "Your crew encountered anomalies. Try again with better gear.",
+      },
     },
-    // Tokens
     tokens: {
       title: "Token Economy",
       balances: "Your Balances",
@@ -94,7 +253,6 @@ export const translations = {
       totalStaked: "Total Staked",
       yourStake: "Your Stake",
     },
-    // Transaction Modals
     transaction: {
       pending: "Preparing for Launch...",
       connecting: "Connecting to Warp Drive...",
@@ -107,7 +265,6 @@ export const translations = {
       retry: "Retry",
       loadSol: "Load SOL Now",
     },
-    // Gas/Fuel System
     fuel: {
       title: "Fuel Management",
       current: "Current Fuel",
@@ -117,7 +274,6 @@ export const translations = {
       refuelSuccess: "Ship refueled successfully!",
       consumptionRate: "Consumption Rate",
     },
-    // Upgrade System
     upgrade: {
       title: "Ship Upgrade",
       currentLevel: "Current Level",
@@ -131,7 +287,15 @@ export const translations = {
     },
   },
   es: {
-    // Navigation
+    common: {
+      connectWallet: "Conectar wallet",
+      disconnect: "Desconectar",
+      walletNotConnected: "Wallet no conectada",
+      connectPrompt: "Conecta tu wallet para continuar.",
+      cancel: "Cancelar",
+      loading: "Cargando...",
+      viewOnSolscan: "Ver en Solscan",
+    },
     nav: {
       home: "Inicio",
       fleet: "Flota",
@@ -139,10 +303,10 @@ export const translations = {
       planets: "Planetas",
       tokens: "Tokens",
     },
-    // Home
     home: {
       title: "Juego de Minería Espacial",
       subtitle: "Explora la galaxia, mina recursos y construye tu imperio",
+      badge: "Activo en Solana Devnet",
       totalFleet: "Flota Total",
       activeMissions: "Misiones Activas",
       totalEarnings: "Ganancias Totales",
@@ -150,8 +314,62 @@ export const translations = {
       exploreMarket: "Explorar Mercado",
       startExpedition: "Iniciar Expedición",
       manageTokens: "Gestionar Tokens",
+      metrics: {
+        minted: "NFTs totales acuñados",
+        dst: "$DST Distribuido",
+        miners: "Mineros Activos",
+      },
+      stats: {
+        miningPower: "Poder de Minería",
+        miningChange: "+12% desde la última expedición",
+        fuelReserves: "Reservas de Combustible",
+        fuelHint: "Suficiente para 12 expediciones",
+        fleetStatus: "Estado de la Flota",
+        fleetHint: "3 naves en hangar",
+      },
+      wallet: {
+        title: "Wallet",
+        disconnected: "No conectada",
+        connectPrompt: "Conecta tu wallet para comenzar",
+        balanceTitle: "Saldo SOL",
+        loading: "Cargando...",
+      },
+      quickActions: {
+        expedition: {
+          title: "Iniciar Expedición",
+          description: "Despliega tu flota para minar recursos.",
+          cta: "Lanzar Expedición",
+        },
+        marketplace: {
+          title: "Mercado",
+          description: "Intercambia naves y drones NFT.",
+          cta: "Explorar Mercado",
+        },
+        planets: {
+          title: "Explorar Planetas",
+          description: "Descubre nuevos lugares de minería.",
+          cta: "Ver Mapa Galáctico",
+        },
+        fleet: {
+          title: "Mejorar y Reparar",
+          description: "Mantén y mejora tu flota.",
+          cta: "Gestionar Flota",
+        },
+        tokens: {
+          title: "Economía de Tokens",
+          description: "Haz staking y controla $GXY y $DST.",
+          cta: "Ver Tokens",
+        },
+        devnet: {
+          title: "Solicitar SOL de Devnet",
+          description: "Carga SOL de prueba desde el faucet de devnet para simular recompensas del juego.",
+          cta: "Solicitar 1 SOL",
+          success: "¡Airdrop solicitado! Tu wallet recibirá 1 SOL en breve.",
+          error: "No fue posible completar el airdrop. Inténtalo de nuevo.",
+          requiresWallet: "Conecta tu wallet para solicitar SOL de devnet.",
+        },
+      },
     },
-    // Fleet
     fleet: {
       title: "Mi Flota",
       ships: "Naves",
@@ -179,8 +397,30 @@ export const translations = {
         epic: "Épico",
         legendary: "Legendario",
       },
+      mintSection: {
+        shipTitle: "Crear Nave Espacial",
+        shipDescription: "Crea una nueva nave NFT",
+        rarityLabel: "Rareza",
+        costLabel: "Costo",
+        gxyRequired: "$GXY Requeridos",
+        pendingTitle: "Creando Nave",
+        pendingDescription: "Creando tu nave {rarity} en la blockchain de Solana...",
+        successTitle: "¡Nave Creada!",
+        successDescription: "Tu nave {rarity} ha sido acuñada y añadida a tu flota.",
+        droneTitle: "Crear Drone",
+        droneDescription: "Crea un nuevo drone NFT",
+        typeLabel: "Tipo",
+        dronePendingTitle: "Creando Drone",
+        dronePendingDescription: "Creando tu drone {type} en la blockchain de Solana...",
+        droneSuccessTitle: "¡Drone Creado!",
+        droneSuccessDescription: "Tu drone {type} ha sido acuñado y está listo para desplegarse.",
+        mintShipCta: "Crear Nave",
+        mintDroneCta: "Crear Drone",
+        minting: "Creando...",
+        walletErrorTitle: "Wallet no conectada",
+        walletErrorDescription: "Conecta tu wallet Phantom o Solflare para acuñar NFTs.",
+      },
     },
-    // Marketplace
     marketplace: {
       title: "Mercado",
       volume: "Volumen 24h",
@@ -196,8 +436,15 @@ export const translations = {
       sortBy: "Ordenar Por",
       buy: "Comprar Ahora",
       listedBy: "Listado por",
+      connectWallet: "Conecta tu wallet para explorar el mercado",
+      showing: "Mostrando {count} listados",
+      sort: {
+        recent: "Listado Recientemente",
+        priceLow: "Precio: Menor a Mayor",
+        priceHigh: "Precio: Mayor a Menor",
+        rarity: "Rareza",
+      },
     },
-    // Planets
     planets: {
       title: "Planetas",
       subtitle: "Elige tu destino",
@@ -211,8 +458,76 @@ export const translations = {
       claim: "Reclamar Recompensas",
       selectShip: "Seleccionar Nave",
       selectDrone: "Seleccionar Drone",
+      connectWallet: "Conecta tu wallet para explorar planetas",
+      availableTitle: "Planetas Disponibles",
+      locked: "Bloqueado",
+      unlockHint: "Mejora tu flota para desbloquear este planeta",
+      needMorePower: "Necesitas {power} MP adicionales",
+      launchTitle: "Lanzar expedición a {planet}",
+      launchDescription: "Selecciona tu flota y comienza a minar",
+      totalMiningPower: "Poder de Minería Total",
+      fuelCost: "Costo de Combustible",
+      durationShort: "Duración",
+      selectShips: "Seleccionar Naves",
+      selectedShips: "{count} seleccionadas",
+      noShipsAvailable: "No hay naves disponibles en el hangar",
+      cancel: "Cancelar",
+      launchCta: "Lanzar Expedición",
+      launching: "Lanzando...",
+      noShipsSelectedTitle: "Sin naves seleccionadas",
+      noShipsSelectedDescription: "Selecciona al menos una nave para la expedición",
+      insufficientPowerTitle: "Poder de Minería Insuficiente",
+      insufficientPowerDescription: "Necesitas {power} MP para minar en este planeta",
+      shipCount: "{count} naves desplegadas",
+      readyToClaim: "¡Listo para reclamar recompensas!",
+      claimRewards: "Reclamar Recompensas",
+      claimToastTitle: "¡Recompensas reclamadas!",
+      claimToastDescription: "Recibiste 2,450 $DST y materiales raros",
+      status: {
+        active: "Activa",
+        complete: "Completada",
+      },
+      catalog: {
+        novaraPrime: {
+          name: "Novara Prime",
+          description: "Un mundo árido con depósitos minerales básicos. Ideal para comenzar.",
+        },
+        crystalis: {
+          name: "Crystalis",
+          description: "Planeta de hielo rico en cristales y minerales poco comunes.",
+        },
+        pyroxis: {
+          name: "Pyroxis",
+          description: "Mundo volcánico con calor extremo y vetas de gran valor.",
+        },
+        nebulox: {
+          name: "Nebulox",
+          description: "Luna de un gigante gaseoso con materia exótica y recursos valiosos.",
+        },
+        quantumNexus: {
+          name: "Quantum Nexus",
+          description: "Planeta legendario en el límite del espacio conocido. Recompensas máximas.",
+        },
+      },
+      worldsExplorer: {
+        title: "Explorador de Mundos",
+        description: "Previsualiza recompensas y simula resultados de expediciones al instante.",
+        winRate: "Probabilidad de Éxito",
+        reward: "Recompensa",
+        gasCost: "Costo de Combustible",
+        explore: "Iniciar Simulación",
+        requirements: "Requisitos",
+        requiresShipLevel: "Nave nivel {level}",
+        requiresCrewLevel: "Tripulación nivel {level}",
+        walletRequired: "Conecta tu wallet para iniciar una simulación.",
+        insufficientGas: "Combustible insuficiente para esta ruta.",
+        pending: "Bloqueando ruta de navegación...",
+        successTitle: "¡Expedición Exitosa!",
+        successDescription: "Tu tripulación trajo de regreso {reward} $DST.",
+        failureTitle: "Expedición Fallida",
+        failureDescription: "Tu tripulación encontró anomalías. Intenta nuevamente con mejor equipo.",
+      },
     },
-    // Tokens
     tokens: {
       title: "Economía de Tokens",
       balances: "Tus Saldos",
@@ -225,7 +540,6 @@ export const translations = {
       totalStaked: "Total Apostado",
       yourStake: "Tu Apuesta",
     },
-    // Transaction Modals
     transaction: {
       pending: "Preparando para el Lanzamiento...",
       connecting: "Conectando al Motor Warp...",
@@ -238,7 +552,6 @@ export const translations = {
       retry: "Reintentar",
       loadSol: "Cargar SOL Ahora",
     },
-    // Gas/Fuel System
     fuel: {
       title: "Gestión de Combustible",
       current: "Combustible Actual",
@@ -248,7 +561,6 @@ export const translations = {
       refuelSuccess: "¡Nave recargada exitosamente!",
       consumptionRate: "Tasa de Consumo",
     },
-    // Upgrade System
     upgrade: {
       title: "Mejora de Nave",
       currentLevel: "Nivel Actual",
@@ -262,7 +574,15 @@ export const translations = {
     },
   },
   zh: {
-    // Navigation
+    common: {
+      connectWallet: "连接钱包",
+      disconnect: "断开连接",
+      walletNotConnected: "钱包未连接",
+      connectPrompt: "请连接钱包以继续。",
+      cancel: "取消",
+      loading: "加载中...",
+      viewOnSolscan: "在 Solscan 查看",
+    },
     nav: {
       home: "主页",
       fleet: "舰队",
@@ -270,10 +590,10 @@ export const translations = {
       planets: "星球",
       tokens: "代币",
     },
-    // Home
     home: {
       title: "太空采矿游戏",
       subtitle: "探索银河系，开采资源，建立你的帝国",
+      badge: "运行在 Solana Devnet",
       totalFleet: "总舰队",
       activeMissions: "活跃任务",
       totalEarnings: "总收益",
@@ -281,8 +601,62 @@ export const translations = {
       exploreMarket: "探索市场",
       startExpedition: "开始探险",
       manageTokens: "管理代币",
+      metrics: {
+        minted: "已铸造 NFT 总量",
+        dst: "已分发 $DST",
+        miners: "活跃矿工",
+      },
+      stats: {
+        miningPower: "采矿能力",
+        miningChange: "较上次探险提升 12%",
+        fuelReserves: "燃料储备",
+        fuelHint: "足够 12 次探险",
+        fleetStatus: "舰队状态",
+        fleetHint: "3 艘飞船在机库",
+      },
+      wallet: {
+        title: "钱包",
+        disconnected: "未连接",
+        connectPrompt: "连接钱包即可开始",
+        balanceTitle: "SOL 余额",
+        loading: "加载中...",
+      },
+      quickActions: {
+        expedition: {
+          title: "开始探险",
+          description: "部署你的舰队去采矿。",
+          cta: "发起探险",
+        },
+        marketplace: {
+          title: "市场",
+          description: "交易 NFT 飞船和无人机。",
+          cta: "浏览市场",
+        },
+        planets: {
+          title: "探索星球",
+          description: "发现新的采矿地点。",
+          cta: "查看星图",
+        },
+        fleet: {
+          title: "升级与维修",
+          description: "维护并强化你的舰队。",
+          cta: "管理舰队",
+        },
+        tokens: {
+          title: "代币经济",
+          description: "质押并跟踪 $GXY 与 $DST。",
+          cta: "查看代币",
+        },
+        devnet: {
+          title: "申请 Devnet SOL",
+          description: "从 devnet 水龙头领取测试 SOL，模拟游戏奖励。",
+          cta: "申请 1 SOL",
+          success: "空投请求已发送！你的钱包很快会收到 1 SOL。",
+          error: "无法完成空投请求，请稍后重试。",
+          requiresWallet: "连接钱包以请求 Devnet SOL。",
+        },
+      },
     },
-    // Fleet
     fleet: {
       title: "我的舰队",
       ships: "飞船",
@@ -310,12 +684,34 @@ export const translations = {
         epic: "史诗",
         legendary: "传奇",
       },
+      mintSection: {
+        shipTitle: "铸造飞船",
+        shipDescription: "创建新的 NFT 飞船",
+        rarityLabel: "稀有度",
+        costLabel: "成本",
+        gxyRequired: "所需 $GXY",
+        pendingTitle: "正在铸造飞船",
+        pendingDescription: "正在 Solana 区块链上创建你的 {rarity} 飞船...",
+        successTitle: "飞船铸造完成！",
+        successDescription: "你的 {rarity} 飞船已成功铸造并加入舰队。",
+        droneTitle: "铸造无人机",
+        droneDescription: "创建新的 NFT 无人机",
+        typeLabel: "类型",
+        dronePendingTitle: "正在铸造无人机",
+        dronePendingDescription: "正在 Solana 区块链上创建你的 {type} 无人机...",
+        droneSuccessTitle: "无人机铸造完成！",
+        droneSuccessDescription: "你的 {type} 无人机已成功铸造并可立即部署。",
+        mintShipCta: "铸造飞船",
+        mintDroneCta: "铸造无人机",
+        minting: "铸造中...",
+        walletErrorTitle: "钱包未连接",
+        walletErrorDescription: "请连接 Phantom 或 Solflare 钱包以铸造 NFT。",
+      },
     },
-    // Marketplace
     marketplace: {
       title: "市场",
-      volume: "24小时交易量",
-      listings: "活跃列表",
+      volume: "24 小时成交量",
+      listings: "活跃挂单",
       avgPrice: "平均价格",
       filters: "筛选",
       assetType: "资产类型",
@@ -327,8 +723,15 @@ export const translations = {
       sortBy: "排序方式",
       buy: "立即购买",
       listedBy: "卖家",
+      connectWallet: "连接钱包以浏览市场",
+      showing: "显示 {count} 个挂单",
+      sort: {
+        recent: "最新挂单",
+        priceLow: "价格：从低到高",
+        priceHigh: "价格：从高到低",
+        rarity: "稀有度",
+      },
     },
-    // Planets
     planets: {
       title: "星球",
       subtitle: "选择你的目的地",
@@ -342,8 +745,76 @@ export const translations = {
       claim: "领取奖励",
       selectShip: "选择飞船",
       selectDrone: "选择无人机",
+      connectWallet: "连接钱包以探索星球",
+      availableTitle: "可探索星球",
+      locked: "已锁定",
+      unlockHint: "升级舰队即可解锁此星球",
+      needMorePower: "还需 {power} MP",
+      launchTitle: "发起前往 {planet} 的探险",
+      launchDescription: "选择你的舰队并开始采矿",
+      totalMiningPower: "总采矿能力",
+      fuelCost: "燃料消耗",
+      durationShort: "持续时间",
+      selectShips: "选择飞船",
+      selectedShips: "已选 {count} 艘",
+      noShipsAvailable: "机库中没有可用飞船",
+      cancel: "取消",
+      launchCta: "启动探险",
+      launching: "正在发射...",
+      noShipsSelectedTitle: "未选择飞船",
+      noShipsSelectedDescription: "请至少选择一艘飞船参与探险",
+      insufficientPowerTitle: "采矿能力不足",
+      insufficientPowerDescription: "你需要 {power} MP 才能在该星球采矿",
+      shipCount: "已部署 {count} 艘飞船",
+      readyToClaim: "可领取奖励！",
+      claimRewards: "领取奖励",
+      claimToastTitle: "奖励已领取！",
+      claimToastDescription: "你获得了 2,450 $DST 和稀有材料",
+      status: {
+        active: "进行中",
+        complete: "已完成",
+      },
+      catalog: {
+        novaraPrime: {
+          name: "诺瓦拉·普莱姆",
+          description: "一颗贫瘠但安全的矿业新手星球，适合初始舰队。",
+        },
+        crystalis: {
+          name: "晶辉星",
+          description: "覆盖冰晶的星球，蕴含大量稀有结晶矿物。",
+        },
+        pyroxis: {
+          name: "炎核星",
+          description: "高温火山星球，拥有丰富且危险的高价值矿脉。",
+        },
+        nebulox: {
+          name: "星云洛克斯",
+          description: "气态巨行星的卫星，遍布异质物质与高价值资源。",
+        },
+        quantumNexus: {
+          name: "量子枢纽",
+          description: "位于已知宇宙边缘的传奇星球，可获得最高奖励。",
+        },
+      },
+      worldsExplorer: {
+        title: "快速星球模拟",
+        description: "即时预览星球奖励并模拟探险结果。",
+        winRate: "成功率",
+        reward: "奖励",
+        gasCost: "燃料消耗",
+        explore: "开始模拟",
+        requirements: "需求",
+        requiresShipLevel: "飞船等级 {level}",
+        requiresCrewLevel: "船员等级 {level}",
+        walletRequired: "连接钱包即可开始模拟。",
+        insufficientGas: "此航线燃料不足。",
+        pending: "正在锁定航线...",
+        successTitle: "探险成功！",
+        successDescription: "你的船员带回了 {reward} $DST。",
+        failureTitle: "探险失败",
+        failureDescription: "船员遇到异常，请升级装备后重试。",
+      },
     },
-    // Tokens
     tokens: {
       title: "代币经济",
       balances: "你的余额",
@@ -356,20 +827,18 @@ export const translations = {
       totalStaked: "总质押量",
       yourStake: "你的质押",
     },
-    // Transaction Modals
     transaction: {
       pending: "准备发射中...",
       connecting: "连接到曲速引擎...",
       success: "任务完成！",
       error: "任务失败",
-      insufficientFunds: "燃料不足：你需要更多SOL来开始这个任务",
+      insufficientFunds: "燃料不足：你需要更多 SOL 来开始这个任务",
       invalidRoute: "无效的导航路线。请重试。",
-      viewOnExplorer: "在Solscan上查看",
+      viewOnExplorer: "在 Solscan 上查看",
       close: "关闭",
       retry: "重试",
-      loadSol: "立即加载SOL",
+      loadSol: "立即加载 SOL",
     },
-    // Gas/Fuel System
     fuel: {
       title: "燃料管理",
       current: "当前燃料",
@@ -379,7 +848,6 @@ export const translations = {
       refuelSuccess: "飞船加油成功！",
       consumptionRate: "消耗率",
     },
-    // Upgrade System
     upgrade: {
       title: "飞船升级",
       currentLevel: "当前等级",
@@ -388,11 +856,11 @@ export const translations = {
       requiredWorkers: "所需工人",
       cost: "升级费用",
       upgradeSuccess: "飞船升级成功！",
-      insufficientWorkers: "你需要{tier}级或更高级别的工人",
+      insufficientWorkers: "你需要 {tier} 级或更高级别的工人",
       maxLevel: "已达到最高等级",
     },
   },
-}
+} as const
 
 export type Language = keyof typeof translations
 export type TranslationKey = typeof translations.en

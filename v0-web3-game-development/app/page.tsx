@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { StatsOverview } from "@/components/stats-overview"
 import { QuickActions } from "@/components/quick-actions"
+import { WorldsExplorer } from "@/components/planets/worlds-explorer"
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <HeroSection />
         <StatsOverview />
         <QuickActions />
+        <WorldsExplorer />
       </div>
     </main>
   )

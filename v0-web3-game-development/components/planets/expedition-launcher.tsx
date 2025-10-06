@@ -9,6 +9,7 @@ import { Loader2, Rocket, Zap, Fuel } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { useI18n } from "@/lib/i18n/context"
 
 interface ExpeditionLauncherProps {
   planet: Planet
@@ -20,6 +21,7 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
   const { toast } = useToast()
   const [selectedShips, setSelectedShips] = useState<string[]>([])
   const [launching, setLaunching] = useState(false)
+  const { t } = useI18n()
 
   const availableShips = ships.filter((ship) => ship.status === "Hangar")
 
@@ -36,8 +38,8 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
   const handleLaunch = async () => {
     if (selectedShips.length === 0) {
       toast({
-        title: "No ships selected",
-        description: "Please select at least one ship for the expedition",
+        title: t.planets.noShipsSelectedTitle,
+        description: t.planets.noShipsSelectedDescription,
         variant: "destructive",
       })
       return
@@ -45,8 +47,11 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
 
     if (totalMiningPower < planet.requiredMiningPower) {
       toast({
-        title: "Insufficient Mining Power",
-        description: `You need ${planet.requiredMiningPower} MP to mine on this planet`,
+        title: t.planets.insufficientPowerTitle,
+        description: t.planets.insufficientPowerDescription.replace(
+          "{power}",
+          planet.requiredMiningPower.toString(),
+        ),
         variant: "destructive",
       })
       return
@@ -56,8 +61,8 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
     toast({
-      title: "Expedition Launched!",
-      description: `Your fleet is now mining on ${planet.name}. Return in ${planet.duration / 3600}h to claim rewards.`,
+      title: t.planets.launchCta,
+      description: t.planets.launchDescription,
     })
 
     setLaunching(false)
@@ -68,7 +73,7 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
     <div className="space-y-6">
       <div className="grid grid-cols-3 gap-4 p-4 rounded-lg bg-background/50 border border-border/50">
         <div className="text-center">
-          <p className="text-xs text-muted-foreground mb-1">Total Mining Power</p>
+          <p className="text-xs text-muted-foreground mb-1">{t.planets.totalMiningPower}</p>
           <p
             className={`text-xl font-bold ${totalMiningPower >= planet.requiredMiningPower ? "text-accent" : "text-destructive"}`}
           >
@@ -76,19 +81,21 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
           </p>
         </div>
         <div className="text-center">
-          <p className="text-xs text-muted-foreground mb-1">Fuel Cost</p>
+          <p className="text-xs text-muted-foreground mb-1">{t.planets.fuelCost}</p>
           <p className="text-xl font-bold text-secondary">{fuelCost} $DST</p>
         </div>
         <div className="text-center">
-          <p className="text-xs text-muted-foreground mb-1">Duration</p>
+          <p className="text-xs text-muted-foreground mb-1">{t.planets.durationShort}</p>
           <p className="text-xl font-bold">{planet.duration / 3600}h</p>
         </div>
       </div>
 
       <div className="space-y-3">
-        <h3 className="font-bold text-lg">Select Ships ({selectedShips.length} selected)</h3>
+        <h3 className="font-bold text-lg">
+          {t.planets.selectShips} ({t.planets.selectedShips.replace("{count}", selectedShips.length.toString())})
+        </h3>
         {availableShips.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No ships available in hangar</p>
+          <p className="text-sm text-muted-foreground">{t.planets.noShipsAvailable}</p>
         ) : (
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {availableShips.map((ship) => (
@@ -140,7 +147,7 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
           onClick={onClose}
           className="flex-1 border-primary/50 hover:bg-primary/10 bg-transparent"
         >
-          Cancel
+          {t.common.cancel}
         </Button>
         <Button
           onClick={handleLaunch}
@@ -150,12 +157,12 @@ export function ExpeditionLauncher({ planet, onClose }: ExpeditionLauncherProps)
           {launching ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Launching...
+              {t.planets.launching}
             </>
           ) : (
             <>
               <Rocket className="mr-2 h-4 w-4" />
-              Launch Expedition
+              {t.planets.launchCta}
             </>
           )}
         </Button>

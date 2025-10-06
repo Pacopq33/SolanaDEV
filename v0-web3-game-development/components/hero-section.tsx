@@ -3,8 +3,16 @@
 import type React from "react"
 
 import { Sparkles, TrendingUp, Users } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 export function HeroSection() {
+  const { t } = useI18n()
+  const stats = [
+    { icon: <Sparkles className="h-5 w-5" />, label: t.home.metrics.minted, value: "12,847", color: "primary" as const },
+    { icon: <TrendingUp className="h-5 w-5" />, label: t.home.metrics.dst, value: "2.4M", color: "secondary" as const },
+    { icon: <Users className="h-5 w-5" />, label: t.home.metrics.miners, value: "3,521", color: "accent" as const },
+  ]
+
   return (
     <section className="relative overflow-hidden rounded-lg border border-primary/30 bg-card/30 p-8 md:p-12">
       <div className="absolute inset-0 grid-pattern opacity-30" />
@@ -13,24 +21,21 @@ export function HeroSection() {
 
       <div className="relative z-10">
         <div className="inline-block mb-4 px-4 py-1 rounded-full border border-accent/50 bg-accent/10">
-          <span className="text-accent text-sm font-bold glow-green">● LIVE ON SOLANA MAINNET</span>
+          <span className="text-accent text-sm font-bold glow-green">● {t.home.badge.toUpperCase()}</span>
         </div>
 
         <h2 className="text-4xl md:text-6xl font-bold mb-4 text-balance">
-          <span className="glow-cyan text-primary">MINE</span>{" "}
-          <span className="glow-magenta text-secondary">EXPLORE</span>{" "}
-          <span className="glow-green text-accent">CONQUER</span>
+          <span className="glow-cyan text-primary">{t.home.title}</span>
         </h2>
 
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl text-pretty">
-          Build your fleet of NFT spaceships, explore 5 unique planetary systems, and earn $DST tokens through strategic
-          mining expeditions in the Solana metaverse.
+          {t.home.subtitle}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <StatCard icon={<Sparkles className="h-5 w-5" />} label="Total NFTs Minted" value="12,847" color="primary" />
-          <StatCard icon={<TrendingUp className="h-5 w-5" />} label="$DST Distributed" value="2.4M" color="secondary" />
-          <StatCard icon={<Users className="h-5 w-5" />} label="Active Miners" value="3,521" color="accent" />
+          {stats.map((stat, index) => (
+            <StatCard key={index} icon={stat.icon} label={stat.label} value={stat.value} color={stat.color} />
+          ))}
         </div>
       </div>
     </section>

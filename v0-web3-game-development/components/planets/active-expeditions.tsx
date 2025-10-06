@@ -8,11 +8,13 @@ import { Progress } from "@/components/ui/progress"
 import { Clock, Rocket, Trophy } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useToast } from "@/hooks/use-toast"
+import { useI18n } from "@/lib/i18n/context"
 
 export function ActiveExpeditions() {
   const { expeditions, loading } = useMockExpeditions()
   const { toast } = useToast()
   const [currentTime, setCurrentTime] = useState(Date.now())
+  const { t } = useI18n()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,8 +25,8 @@ export function ActiveExpeditions() {
 
   const handleClaim = (expeditionId: string) => {
     toast({
-      title: "Rewards Claimed!",
-      description: "You received 2,450 $DST and rare materials",
+      title: t.planets.claimToastTitle,
+      description: t.planets.claimToastDescription,
     })
   }
 
@@ -34,7 +36,7 @@ export function ActiveExpeditions() {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold text-primary">ACTIVE EXPEDITIONS</h2>
+      <h2 className="text-2xl font-bold text-primary">{t.planets.activeExpeditions.toUpperCase()}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {expeditions.map((expedition) => {
           const timeRemaining = Math.max(0, expedition.endTime - currentTime)
@@ -58,14 +60,14 @@ export function ActiveExpeditions() {
                         : "bg-primary/20 text-primary border-primary/50"
                     }
                   >
-                    {isComplete ? "COMPLETE" : "ACTIVE"}
+                    {isComplete ? t.planets.status.complete.toUpperCase() : t.planets.status.active.toUpperCase()}
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Rocket className="h-4 w-4" />
-                  <span>{expedition.shipCount} ships deployed</span>
+                  <span>{t.planets.shipCount.replace("{count}", expedition.shipCount.toString())}</span>
                 </div>
 
                 {!isComplete ? (
@@ -74,7 +76,7 @@ export function ActiveExpeditions() {
                       <div className="flex items-center justify-between text-sm">
                         <div className="flex items-center gap-2">
                           <Clock className="h-4 w-4 text-secondary" />
-                          <span className="text-muted-foreground">Time Remaining</span>
+                          <span className="text-muted-foreground">{t.planets.timeRemaining}</span>
                         </div>
                         <span className="font-bold font-mono">
                           {hours.toString().padStart(2, "0")}:{minutes.toString().padStart(2, "0")}:
@@ -88,13 +90,13 @@ export function ActiveExpeditions() {
                   <div className="space-y-3">
                     <div className="flex items-center gap-2 text-sm">
                       <Trophy className="h-4 w-4 text-accent" />
-                      <span className="text-accent font-bold">Ready to claim rewards!</span>
+                      <span className="text-accent font-bold">{t.planets.readyToClaim}</span>
                     </div>
                     <Button
                       onClick={() => handleClaim(expedition.id)}
                       className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
                     >
-                      CLAIM REWARDS
+                      {t.planets.claimRewards.toUpperCase()}
                     </Button>
                   </div>
                 )}
